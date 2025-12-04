@@ -141,26 +141,17 @@ const agents = [
     },
 ];
 
-// Animation Variants
+// Animation Variants - simplified for TypeScript compatibility
 const fadeInUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
 };
 
 const stagger = {
     visible: { transition: { staggerChildren: 0.15 } }
 };
 
-const pulseNeon = {
-    animate: {
-        boxShadow: [
-            '0 0 20px rgba(57, 255, 20, 0.4), 0 0 40px rgba(57, 255, 20, 0.2)',
-            '0 0 40px rgba(57, 255, 20, 0.6), 0 0 80px rgba(57, 255, 20, 0.4)',
-            '0 0 20px rgba(57, 255, 20, 0.4), 0 0 40px rgba(57, 255, 20, 0.2)',
-        ],
-        transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
-    }
-};
+// Removed pulseNeon constant - using inline animation instead
 
 export default function Home() {
     const [lang, setLang] = useState<'en' | 'ar'>('en');
@@ -268,15 +259,12 @@ export default function Home() {
                     >
                         {/* Logo */}
                         <div className="flex items-center gap-3">
-                            <motion.div
-                                className="relative w-10 h-10"
-                                animate={pulseNeon.animate}
-                            >
+                            <div className="relative w-10 h-10 animate-pulse">
                                 <div className="absolute inset-0 bg-[#39FF14]/30 blur-xl rounded-full" />
                                 <div className="relative w-10 h-10 rounded-xl bg-[#39FF14]/20 border border-[#39FF14]/50 flex items-center justify-center">
                                     <Eye className="w-5 h-5 text-[#39FF14]" />
                                 </div>
-                            </motion.div>
+                            </div>
                             <span className="text-white font-bold text-xl tracking-tight">Axiom</span>
                             <span className="text-[#39FF14] font-light text-xl">RESET</span>
                         </div>
@@ -403,8 +391,8 @@ export default function Home() {
                             <motion.button
                                 onClick={startVoice}
                                 className={`group relative px-8 py-5 rounded-full font-bold text-lg overflow-hidden transition-all ${isListening
-                                        ? 'bg-red-500 text-white'
-                                        : 'bg-white/5 text-white border-2 border-white/20 hover:border-[#39FF14]/50'
+                                    ? 'bg-red-500 text-white'
+                                    : 'bg-white/5 text-white border-2 border-white/20 hover:border-[#39FF14]/50'
                                     }`}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
